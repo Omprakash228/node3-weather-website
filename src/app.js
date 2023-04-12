@@ -5,7 +5,7 @@ const geocode = require('./utils/geocode');
 const forecast = require('./utils/forecast');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = 4200;
 
 const publicDirectoryPath = path.join(__dirname, '../public');
 const viewsPath = path.join(__dirname, '../templates/views');
@@ -51,7 +51,7 @@ app.get('/weather', (req, res) => {
         if(error) {
             return res.send({error})
         }
-        forecast(latitude, longitude, (error, forecastData) => {
+        forecast(address, (error, forecastData) => {
             if(error) {
                 return res.send({error})
             }   
@@ -76,4 +76,4 @@ app.get('*', (req, res) => {
     })
 })
 
-app.listen(port);
+app.listen(port, () => { console.log("started")});
